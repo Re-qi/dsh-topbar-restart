@@ -1,6 +1,6 @@
 {
   "name": "dsh-topbar-restart",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "DSH 桌面端 Windows 标题栏一键重启按钮：点击后关闭 DSH 并自动重新拉起同一个应用。",
   "license": "MIT",
@@ -35,11 +35,15 @@
     "icon.svg",
     "lib/spawn-detached.ps1",
     "lib/restart.cmd",
+    "scripts/check-lib-encoding.mjs",
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
     "docs/*.png"
   ],
+  "scripts": {
+    "prepack": "node scripts/check-lib-encoding.mjs"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

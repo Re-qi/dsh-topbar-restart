@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.2 — 2026-10-31
+
+修复：助手批处理在中文（GBK）控制台下可能解析错乱。
+
+- `lib/restart.cmd` / `lib/spawn-detached.ps1` 改为**纯 ASCII + CRLF**。原来注释里各有一个 em dash（UTF-8
+  `E2 80 94`），cmd.exe 按 OEM 代码页读取时 `0x94` 会被当作双字节前导、吞掉换行；行边界错乱后注释文字
+  会被当成命令执行（`'dsh-topbar-restart' 不是内部或外部命令`），`goto` 还可能死循环。
+- 新增 `scripts/check-lib-encoding.mjs` 并挂到 `prepack`：发布前强制校验两个脚本是纯 ASCII + CRLF，
+  这类字节问题不会再发出去。
+- 重启链路逻辑与 1.0.1 一致。
+
 ## 1.0.1 — 2026-10-31
 
 - 发布到 npm：`dsh-topbar-restart`，市场走 registry 通道读清单并安装。

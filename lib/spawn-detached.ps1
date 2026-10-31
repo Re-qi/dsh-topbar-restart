@@ -14,7 +14,7 @@
   script-guard (measured here: `Access is denied` before the script runs), while
   a batch file built from taskkill/tasklist/start passes.
 
-  Exit code 0 means the helper process exists — not merely that it was asked
+  Exit code 0 means the helper process exists, not merely that it was asked
   for. Anything else is reported to the page as a failed restart.
 #>
 [CmdletBinding()]
