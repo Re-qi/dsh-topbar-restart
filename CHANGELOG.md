@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.3 — 2026-11-01
+
+体验：重启全程**不闪控制台窗口**。
+
+- `lib/spawn-detached.ps1` 创建助手时带 `Win32_ProcessStartup.ShowWindow = 0`（SW_HIDE）：
+  `Win32_Process.Create` 默认会给助手开一个可见的 cmd 窗口，点一次按钮就闪一下；现在控制台存在但从不显示。
+- 三级降级：CIM（`cim-hidden`）→ WMI 类型加速器（`wmi-hidden`）→ 无 startup 信息（`cim-visible`，
+  宁可闪窗也要能重启）；启动器把实际用的通道写进 stdout，便于排查。
+- 实测：替身进程树上采样 8 秒，launcher 与 helper 全程零可见窗口，杀树与拉起均正常。
+
 ## 1.0.2 — 2026-10-31
 
 修复：助手批处理在中文（GBK）控制台下可能解析错乱。

@@ -67,6 +67,9 @@ git clone https://github.com/Re-qi/dsh-topbar-restart.git "$env:USERPROFILE\.dsh
 - **为什么绕一层**：插件跑在 Host 里，而 Host 是 Electron 主进程的**子进程**。直接 `taskkill /T` 会把自己也杀掉，
   永远走不到「重新拉起」。所以真正的助手必须在**进程树之外**创建 —— `Win32_Process.Create` 造出来的进程父进程是
   `WmiPrvSE.exe`，`/T` 杀不到它。
+- **为什么不闪窗**：`Win32_Process.Create` 默认会给助手开一个可见的控制台窗口，所以创建时带
+  `Win32_ProcessStartup.ShowWindow = 0`（SW_HIDE）——控制台存在但从不显示，点按钮不会闪黑窗。
+  依次尝试 CIM → WMI 类型加速器 → 无 startup 信息（最后一档宁可闪窗也要能重启）。
 - **为什么助手是 `.cmd` 而不是 `.ps1`**：实测在装有 HIPS/脚本防护的机器上，**由 WMI 创建的 PowerShell 会在脚本执行前
   就被拦掉**（`拒绝访问`），而 `taskkill` / `tasklist` / `start` 组成的批处理能正常跑。
 - **为什么不用 `app.relaunch()`**：桌面外壳没有向页面开放重启 IPC，它自带的「重启应用与 Host」只存在于开发构建的托盘菜单。
