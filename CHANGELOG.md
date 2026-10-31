@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-10-31
+
+- 发布到 npm：`dsh-topbar-restart`，市场走 registry 通道读清单并安装。
+- README 补齐安装方式（市场 / 命令行 / 手动 link）与徽章；`.gitignore` 忽略 `.npmrc`。
+- 代码与 1.0.0 一致。
+
 ## 1.0.0 — 2026-10-31
 
 首个版本。

@@ -1,5 +1,9 @@
 # dsh-topbar-restart · DSH 顶栏一键重启
 
+[![npm version](https://img.shields.io/npm/v/dsh-topbar-restart?style=flat-square)](https://www.npmjs.com/package/dsh-topbar-restart)
+[![topic: dsh-plugin](https://img.shields.io/badge/topic-dsh_plugin-4D6BFE?style=flat-square)](https://github.com/topics/dsh-plugin)
+[![License](https://img.shields.io/github/license/Re-qi/dsh-topbar-restart?style=flat-square)](LICENSE)
+
 在 DSH 桌面端（Windows）的标题栏、**最小化按钮左边**加一个 `⏻ 重启` 按钮：点一下，DSH 关闭，
 随后自动重新拉起同一个应用。
 
@@ -14,17 +18,28 @@
 
 ### 1. 插件市场（推荐）
 
-本仓库打了 **`dsh-plugin`** topic，会被 DSH 插件市场（`dsh-plugin-console` 的静态索引，GitHub Actions 每 6 小时重建一轮）
-自动收录，**无需申请、无需审核**：
+已发布 npm 包 **[`dsh-topbar-restart`](https://www.npmjs.com/package/dsh-topbar-restart)**，仓库也打了
+**`dsh-plugin`** topic，所以市场既能读到清单、也能一键装。
+
+### 1. 插件市场（推荐）
 
 > 设置 → 插件 → 市场 → 搜 `dsh-topbar-restart` → 添加
 
-索引还没轮到本仓库时，市场的**实时搜索**（GitHub 源）也能直接搜到它。
+市场的静态索引由 GitHub Actions 每 6 小时按 star 重建一轮（前 500 名）；新仓库还排在榜外时，
+用市场的**实时搜索**（GitHub 源）同样能搜到本仓库。有 npm 包时安装走 registry 通道，最稳。
 
-### 2. 手动安装（等价于市场做的事）
+### 2. 命令行
 
-市场在没有 npm 包时会自动降级到 **GitHub Release 资产 → git 克隆**，并把包物化到
-`~/.dsh/plugin-src/<pkg>`、在 profile 里写 `link:`。手动照做：
+```sh
+dsh plugin --profile desktop add dsh-topbar-restart
+```
+
+`--profile` 换成你自己的 profile 名（桌面客户端默认 `desktop`），装完重启 DSH。
+
+### 3. 手动安装（等价于市场做的事）
+
+没有 npm 时市场会降级到 **GitHub Release 资产 → git 克隆**，把包物化到 `~/.dsh/plugin-src/<pkg>`、
+在 profile 里写 `link:`。手动照做：
 
 ```powershell
 git clone https://github.com/Re-qi/dsh-topbar-restart.git "$env:USERPROFILE\.dsh\plugins-src\dsh-topbar-restart"
@@ -114,10 +129,11 @@ immediately left of the native minimise button:
 - Windows desktop only. In a plain browser the button is not rendered (no caption strip, no
   process to restart) and the route answers 501.
 
-Install: the repository carries the `dsh-plugin` topic, so the DSH plugin market picks it up
-automatically — **Settings → Plugins → Market → search `dsh-topbar-restart`**. Without an npm
-package the market falls back to the GitHub Release asset, then to a git clone plus a `link:`
-entry.
+Install: published on npm as **`dsh-topbar-restart`** and tagged with the `dsh-plugin` topic, so the
+DSH plugin market both reads its manifest and installs it in one click —
+**Settings → Plugins → Market → search `dsh-topbar-restart`**, or
+`dsh plugin --profile desktop add dsh-topbar-restart`. Without npm the market falls back to the
+GitHub Release asset, then to a git clone plus a `link:` entry.
 
 Diagnostics: `%TEMP%\dsh-topbar-restart.log`, `GET /__dsh-topbar-restart/restart`, and
 `POST /__dsh-topbar-restart/restart?dry=1` (header `x-dsh-topbar-restart: restart`) which reports
