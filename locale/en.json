@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Top bar restart",
+    "description": "Adds a restart button to the Windows caption strip, left of the minimise button: it stops DSH and starts the same application again."
+  }
+}

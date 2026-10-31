@@ -1,0 +1,54 @@
+{
+  "name": "dsh-topbar-restart",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DSH 桌面端 Windows 标题栏一键重启按钮：点击后关闭 DSH 并自动重新拉起同一个应用。",
+  "license": "MIT",
+  "author": "Re-qi",
+  "repository": "github:Re-qi/dsh-topbar-restart",
+  "homepage": "https://github.com/Re-qi/dsh-topbar-restart",
+  "bugs": "https://github.com/Re-qi/dsh-topbar-restart/issues",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "restart",
+    "titlebar",
+    "windows",
+    "desktop"
+  ],
+  "icon": "./icon.svg",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "lib/spawn-detached.ps1",
+    "lib/restart.cmd",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout"
+      ]
+    }
+  }
+}
