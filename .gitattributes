@@ -1,0 +1,5 @@
+* text=auto
+# cmd.exe 对只有 LF 的批处理在某些 goto/括号块上会出错，强制 CRLF 检出。
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.png binary
